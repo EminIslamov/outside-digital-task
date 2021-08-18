@@ -100,6 +100,10 @@ body {
   margin-left: 32px;
 }
 
+.available_for_deposit {
+  margin-bottom: 16px;
+}
+
 .btn_for_decreasing_payment {
   background: linear-gradient(
       255.35deg,
@@ -204,7 +208,6 @@ body {
 /* for phones */
 
 @media (max-width: 544px) {
-
   .exit-btn {
     margin-top: 10px;
   }
@@ -255,7 +258,5 @@ body {
 
   .adding_button {
     margin-top: 140px;
-
-
   }
 }

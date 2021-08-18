@@ -1,22 +1,23 @@
 import "../index.css";
 import Button from "./Button";
 import Modal from "./modal/Modal";
-import { useState } from "react";
-import "../index.css";
+import { useEffect, useRef, useState } from "react";
 import { ReactSVG } from "react-svg";
 import exitButton from "./modal/svgs/exitButton.svg";
+import calculate from "../utils/Calculate";
 
 function App() {
   const [modalActive, setModalActive] = useState(false);
-  const [salary, setSalary] = useState("");
-  const [summ, setSumm] = useState("");
+  const [salary, setSalary] = useState(0);
+  let sum = useRef();
 
   const handleSetSalary = (e) => {
-    setSalary(e.target.value);
-    setSumm(salary * 3);
+    setSalary(() => Number(e.target.value));
   };
 
-  console.log(summ);
+  useEffect(() => {
+    sum.current = calculate(salary);
+  }, [salary]);
 
   return (
     <>
@@ -46,43 +47,19 @@ function App() {
           <div className="available_for_deposit">
             Итого можно внести в качестве досрочых:
           </div>
-          <div className="first_year">
-            <label className="check option">
-              <input type="checkbox" className="check_input" />
-              <span className="check_box"></span>
-              <span>{Math.floor(salary * 12 * 0.13)} рублей</span>
-            </label>
-            <div className="line" />
-          </div>
-          <div>
-            <label className="check option">
-              <input type="checkbox" className="check_input" />
-              <span className="check_box"></span>
-              <span>{Math.floor(salary * 12 * 0.13)} рублей</span>
-            </label>
-            <div className="line" />
-          </div>
-          <div>
-            <label className="check option">
-              <input type="checkbox" className="check_input" />
-              <span className="check_box"></span>
-              <span>{Math.floor(salary * 12 * 0.13)} рублей</span>
-            </label>
-            <div className="line" />
-          </div>
-          <div>
-            <label className="check option">
-              <input type="checkbox" className="check_input" />
-              <span className="check_box"></span>
-              <span>
-                {summ >= 260000
-                  ? Math.floor(summ - 3 * (salary * 12 * 0.13))
-                  : Math.floor(salary * 12 * 0.13)}{" "}
-                рублей
-              </span>
-            </label>
-            <div className="line" />
-          </div>
+          {sum.current !== undefined &&
+            sum.current.map((payment) => {
+              return (
+                <div>
+                  <label className="check option">
+                    <input type="checkbox" className="check_input" />
+                    <span className="check_box"/>
+                    <span>{payment} руб.</span>
+                  </label>
+                  <div className="line" />
+                </div>
+              );
+            })}
         </div>
         <div className="parent_for_decrease">
           <div className="what_decrease">Что уменьшаем?</div>

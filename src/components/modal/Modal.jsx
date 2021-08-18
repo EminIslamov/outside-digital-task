@@ -1,7 +1,5 @@
 import React from "react";
 import "./modal.css";
-import exitButton from "./svgs/exitButton.svg";
-import { ReactSVG } from "react-svg";
 
 function Modal({ active, setActive, children }) {
   return (
