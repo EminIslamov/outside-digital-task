@@ -1,5 +1,6 @@
 import React from "react";
 import "./modal.css";
+import PropTypes from "prop-types";
 
 function Modal({ active, setActive, children }) {
   return (
@@ -18,5 +19,11 @@ function Modal({ active, setActive, children }) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  active: PropTypes.bool,
+  setActive: PropTypes.func,
+  children: PropTypes.object,
+};
 
 export default Modal;

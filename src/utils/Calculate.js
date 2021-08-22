@@ -24,7 +24,7 @@ const calculate = (salary) => {
 
   sum.push(Math.ceil(left));
 
-  return sum
+  return sum;
 };
 
 export default calculate;

@@ -9,15 +9,15 @@ import calculate from "../utils/Calculate";
 function App() {
   const [modalActive, setModalActive] = useState(false);
   const [salary, setSalary] = useState("");
-  let [sum, setSum] = useState([])
+  let [sum, setSum] = useState([]);
 
   const handleSetSalary = (e) => {
     setSalary(() => Number(e.target.value));
   };
 
   useEffect(() => {
-    setSum(calculate(salary >= 15000 ? salary : 0))
-  },[salary]);
+    setSum(calculate(salary >= 15000 ? salary : 0));
+  }, [salary]);
 
   return (
     <>
