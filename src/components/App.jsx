@@ -1,7 +1,7 @@
 import "../index.css";
 import Button from "./Button";
 import Modal from "./modal/Modal";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import exitButton from "./modal/svgs/exitButton.svg";
 import calculate from "../utils/Calculate";
@@ -9,16 +9,17 @@ import calculate from "../utils/Calculate";
 function App() {
   const [modalActive, setModalActive] = useState(false);
   const [salary, setSalary] = useState(0);
-  let sum = useRef();
+  let [sum, setSum] = useState([])
 
   const handleSetSalary = (e) => {
     setSalary(() => Number(e.target.value));
   };
 
   useEffect(() => {
-    sum.current = calculate(salary);
-  }, [salary]);
+    setSum(calculate(salary > 15000 ? salary : 0))
+  },[salary]);
 
+  console.log(salary)
   return (
     <>
       <Button active={modalActive} setActive={setModalActive} />
@@ -47,13 +48,13 @@ function App() {
           <div className="available_for_deposit">
             Итого можно внести в качестве досрочых:
           </div>
-          {sum.current !== undefined &&
-            sum.current.map((payment) => {
+          {sum !== undefined &&
+            sum.map((payment) => {
               return (
                 <div>
                   <label className="check option">
                     <input type="checkbox" className="check_input" />
-                    <span className="check_box"/>
+                    <span className="check_box" />
                     <span>{payment} руб.</span>
                   </label>
                   <div className="line" />
