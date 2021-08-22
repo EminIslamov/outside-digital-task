@@ -8,7 +8,7 @@ import calculate from "../utils/Calculate";
 
 function App() {
   const [modalActive, setModalActive] = useState(false);
-  const [salary, setSalary] = useState(0);
+  const [salary, setSalary] = useState("");
   let [sum, setSum] = useState([])
 
   const handleSetSalary = (e) => {
@@ -16,10 +16,9 @@ function App() {
   };
 
   useEffect(() => {
-    setSum(calculate(salary > 15000 ? salary : 0))
+    setSum(calculate(salary >= 15000 ? salary : 0))
   },[salary]);
 
-  console.log(salary)
   return (
     <>
       <Button active={modalActive} setActive={setModalActive} />
@@ -37,8 +36,8 @@ function App() {
         <input
           type="text"
           className="form_for_salary"
-          placeholder="Введите данные"
-          value={salary}
+          placeholder="Введите данные (от 15000)"
+          value={Number.isNaN(salary) ? 0 : salary}
           onChange={handleSetSalary}
         />
         <p className="calculate">Рассчитать</p>
