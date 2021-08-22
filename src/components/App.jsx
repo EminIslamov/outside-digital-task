@@ -16,7 +16,7 @@ function App() {
   };
 
   useEffect(() => {
-    setSum(calculate(salary >= 15000 ? salary : 0));
+    setSum(calculate(salary >= 30000 ? salary : 0));
   }, [salary]);
 
   return (
@@ -36,7 +36,7 @@ function App() {
         <input
           type="text"
           className="form_for_salary"
-          placeholder="Введите данные (от 15000)"
+          placeholder="Введите данные (от 30000)"
           value={Number.isNaN(salary) ? 0 : salary}
           onChange={handleSetSalary}
         />
